@@ -18,10 +18,5 @@ public class StudentController {
         System.out.println("limit==>"+limit);
         return sds.getStuData(page,limit);
     }
-  /* @RequestMapping("/getStuData")
-   public Map<String,Object> getStuData(){
-
-       return sds.getStuData();
-   }*/
 
 }
