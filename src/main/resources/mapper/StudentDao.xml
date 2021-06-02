@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!-- 这里填写对应的Dao文件所在的路径 -->
+<mapper namespace="com.example.campus.dao.StudentDao">
+    <!-- 填写数据库里实例Dictionary对应的表的表名 -->
+    <!-- 这里是作为一个变量使用 -->
+    <sql id="table">student</sql>
+    <!-- id属性填写Dao文件里的函数名称 xxType是参数或是结果的类型根据情况填写 -->
+    <!-- 查询图书类别数量 /*limit #{offset},#{limit}*/-->
+    <select id="getStuData" resultType="com.example.campus.model.SuperStudent">
+        SELECT s.*, d.bname  FROM student s
+            left join  dictionary d
+             on s.department = d.num
+        <where>
+            1=1
+            limit #{offset},#{limit}
+        </where>
+
+    </select>
+    <!-- 查询学生数量-->
+    <select id="getStuCount" resultType="Integer">
+        SELECT count(*)  FROM student s
+        left join  dictionary d
+        on s.department = d.num
+    </select>
+
+</mapper>
