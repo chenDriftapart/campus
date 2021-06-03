@@ -1,5 +1,6 @@
 package com.example.campus.controller;
 
+import com.example.campus.model.Param;
 import com.example.campus.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,10 +14,9 @@ public class StudentController {
     private StudentService sds;
 
     @RequestMapping("/getStuData")
-    public Map<String,Object> getStuData(int page,int limit){
-        System.out.println("page==>"+page);
-        System.out.println("limit==>"+limit);
-        return sds.getStuData(page,limit);
+    public Map<String,Object> getStuData(Param param){
+        System.out.println("result===>"+param);
+        return sds.getStuData(param);
     }
 
 }

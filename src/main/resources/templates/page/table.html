@@ -19,34 +19,37 @@
                 <form class="layui-form layui-form-pane" action="">
                     <div class="layui-form-item">
                         <div class="layui-inline">
-                            <label class="layui-form-label">用户姓名</label>
+                            <label class="layui-form-label layui-bg-cyan">学生姓名</label>
                             <div class="layui-input-inline">
-                                <input type="text" name="username" autocomplete="off" class="layui-input">
+                                <input type="text" name="username" autocomplete="off" class="layui-input layui-bg-gray">
                             </div>
                         </div>
                         <div class="layui-inline">
-                            <label class="layui-form-label">用户性别</label>
+                            <label class="layui-form-label layui-bg-cyan">学号</label>
                             <div class="layui-input-inline">
-                                <input type="text" name="sex" autocomplete="off" class="layui-input">
+                                <input type="text" name="number" autocomplete="off" class="layui-input layui-bg-gray">
                             </div>
                         </div>
                         <div class="layui-inline">
-                            <label class="layui-form-label">用户城市</label>
-                            <div class="layui-input-inline">
-                                <input type="text" name="city" autocomplete="off" class="layui-input">
+                            <label class="layui-form-label layui-bg-cyan">系别</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="department" autocomplete="off" class="layui-input layui-bg-gray">
                             </div>
                         </div>
                         <div class="layui-inline">
-                            <label class="layui-form-label">用户职业</label>
+                            <label class="layui-form-label layui-bg-cyan">电话</label>
                             <div class="layui-input-inline">
-                                <input type="text" name="classify" autocomplete="off" class="layui-input">
+                                <input type="text" name="phone" autocomplete="off" class="layui-input layui-bg-gray">
                             </div>
                         </div>
                         <div class="layui-inline">
-                            <button type="submit" class="layui-btn layui-btn-primary"  lay-submit lay-filter="data-search-btn"><i class="layui-icon"></i> 搜 索</button>
+                            <button type="submit" class="layui-btn layui-btn-primary layui-bg-green"  lay-submit lay-filter="data-search-btn"><i class="layui-icon"></i> 搜 索</button>
+                            <button type="submit" class="layui-btn layui-btn-primary layui-bg-green"  lay-submit lay-filter="data-clear-btn"><i class="layui-icon"></i> 清 空</button>
+
                         </div>
                     </div>
                 </form>
+
             </div>
         </fieldset>
 
@@ -101,7 +104,7 @@
                 {field: 'dormitory',width: 100, title: '寝室号',  align: 'center'},
                 {field: 'bname', width: 140, title: '系别', align: 'center', sort: true},
                 {field: 'phone', width: 140, title: '电话', align: 'center', sort: true},
-                {field: 'etime', width: 140, align: 'center', title: '入职时间'},
+                {field: 'etime', width: 140, align: 'center', title: '入学时间'},
                 {title: '操作', width: 140, toolbar: '#currentTableBar', align: "center"}
              ]
             ],
@@ -112,23 +115,30 @@
 
         // 监听搜索操作
         form.on('submit(data-search-btn)', function (data) {
-            var result = JSON.stringify(data.field);
-            layer.alert(result, {
-                title: '最终的搜索信息'
-            });
-
             //执行搜索重载
             table.reload('currentTableId', {
                 page: {
                     curr: 1
                 }
                 , where: {
-                    searchParams: result
+                    "username": data.field.username,
+                    "phone": data.field.phone,
+                    "number": data.field.number,
+                    "department": data.field.department
                 }
             }, 'data');
 
             return false;
         });
+
+        // 清空
+        form.on('submit(data-clear-btn)', function (data) {
+            data.field.username='';
+            data.field.phone='';
+            data.field.number='';
+            data.field.department='';
+        });
+
 
         /**
          * toolbar监听事件

@@ -7,11 +7,9 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Student {
-    /**主键**/
-    private int id;
+public class Param {
     /**姓名**/
-    private String name;
+    private String username;
     /**学号**/
     private String number;
     /**系别**/
@@ -26,4 +24,12 @@ public class Student {
     private String phone;
     /**性别**/
     private int sex;
+    /**当前页**/
+    private int page;
+    /**限制**/
+    private int limit;
+    /**偏移量**/
+    private int offset;
+    /**数量**/
+    private int count;
 }
